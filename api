@@ -1,8 +1,0 @@
-facturx/
-│── facturx/             # lib officielle
-│── api/
-│    ├── main.py         # FastAPI REST API
-│    ├── models.py       # Schémas de données
-│    └── utils.py        # Helpers PDF/XML
-│── requirements.txt
-│── Dockerfile
