@@ -87,6 +87,8 @@ INVOICE_EXAMPLE: Dict[str, Any] = {
 class Invoice(BaseModel):
 
     model_config = ConfigDict(json_schema_extra={"example": INVOICE_EXAMPLE})
+
+    model_config = ConfigDict(json_schema_extra={"example": INVOICE_EXAMPLE})
     model_config = ConfigDict(
         json_schema_extra={
             "example": {
