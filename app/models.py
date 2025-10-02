@@ -85,7 +85,58 @@ INVOICE_EXAMPLE: Dict[str, Any] = {
 
 
 class Invoice(BaseModel):
+
     model_config = ConfigDict(json_schema_extra={"example": INVOICE_EXAMPLE})
+    model_config = ConfigDict(
+        json_schema_extra={
+            "example": {
+                "invoice_number": "INV-2024-0001",
+                "issue_date": "2024-01-15",
+                "due_date": "2024-01-30",
+                "currency": "EUR",
+                "payment_reference": "INV-2024-0001",
+                "payment_means_code": "30",
+                "seller_bank_iban": "FR7630004000031234567890143",
+                "seller": {
+                    "name": "ACME Corp",
+                    "address": {
+                        "street": "1 Infinite Loop",
+                        "postal_code": "75001",
+                        "city": "Paris",
+                        "country_code": "FR",
+                    },
+                    "vat_identifier": "FR12345678901",
+                    "tax_registration_id": "123456789",
+                    "email": "billing@acme.example",
+                },
+                "buyer": {
+                    "name": "Client SAS",
+                    "address": {
+                        "street": "10 Rue de la Paix",
+                        "postal_code": "75002",
+                        "city": "Paris",
+                        "country_code": "FR",
+                    },
+                    "vat_identifier": "FR98765432109",
+                    "email": "contact@client.example",
+                },
+                "line_items": [
+                    {
+                        "description": "Consulting services",
+                        "quantity": "2",
+                        "unit_price": "150",
+                        "vat_rate": "20",
+                    },
+                    {
+                        "description": "Software license",
+                        "quantity": "1",
+                        "unit_price": "300",
+                        "vat_rate": "20",
+                    },
+                ],
+            }
+        }
+    )
 
     invoice_number: str = Field(..., min_length=1)
     issue_date: date
