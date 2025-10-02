@@ -2,6 +2,7 @@ pypdf>=5.3.0
 lxml
 fastapi
 uvicorn
+httpx
 reportlab
 pydantic>=2.0
 pytest
