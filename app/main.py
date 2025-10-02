@@ -1,8 +1,8 @@
 from __future__ import annotations
 
-from fastapi import FastAPI, HTTPException, Response
+from fastapi import Body, FastAPI, HTTPException, Response
 
-from .models import Invoice
+from .models import INVOICE_EXAMPLE, Invoice
 from .utils import generate_facturx_pdf
 
 app = FastAPI(
@@ -19,7 +19,11 @@ def ping() -> dict[str, str]:
 
 
 @app.post("/invoices/pdf", response_class=Response)
-def create_invoice_pdf(invoice: Invoice) -> Response:
+def create_invoice_pdf(
+    invoice: Invoice = Body(
+        ..., examples={"ValidInvoice": {"summary": "Invoice conforme", "value": INVOICE_EXAMPLE}}
+    )
+) -> Response:
     try:
         pdf_bytes = generate_facturx_pdf(invoice)
     except ValueError as exc:  # pragma: no cover - defensive
