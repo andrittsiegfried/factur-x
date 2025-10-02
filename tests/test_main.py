@@ -9,8 +9,14 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from facturx import get_facturx_xml_from_pdf, xml_check_xsd
 
+
 from app.main import app, create_invoice_pdf
 from app.models import INVOICE_EXAMPLE, Invoice
+from copy import deepcopy
+
+from app.main import app
+from app.models import INVOICE_EXAMPLE
+
 
 
 def test_openapi_example_matches_invoice_example():
@@ -20,7 +26,9 @@ def test_openapi_example_matches_invoice_example():
 
 
 def test_generate_invoice_pdf():
+
     invoice = Invoice.model_validate(deepcopy(INVOICE_EXAMPLE))
+    payload = deepcopy(INVOICE_EXAMPLE)
 
     response = create_invoice_pdf(invoice)
 
