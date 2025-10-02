@@ -5,7 +5,17 @@ from fastapi import FastAPI, HTTPException, Response
 from .models import Invoice
 from .utils import generate_facturx_pdf
 
-app = FastAPI(title="Factur-X Invoice Generator")
+app = FastAPI(
+    title="API Factur-X",
+    description="Génération de PDF et XML conformes EN16931",
+    version="1.0.0",
+)
+
+
+@app.get("/")
+def ping() -> dict[str, str]:
+    """Simple health endpoint to ensure the API is reachable."""
+    return {"message": "API opérationnelle"}
 
 
 @app.post("/invoices/pdf", response_class=Response)
